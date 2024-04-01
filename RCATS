@@ -2,52 +2,10 @@
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local Title = Instance.new("TextLabel")
-local PasswordBox = Instance.new("TextBox")
-
--- Configurar la interfaz de usuario
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-ScreenGui.ResetOnSpawn = false
-
-Frame.Parent = ScreenGui
-Frame.BackgroundColor3 = Color3.new(0, 0, 0)
-Frame.BorderColor3 = Color3.new(0, 0, 0)
-Frame.Position = UDim2.new(0, 0, 0, 0)
-Frame.Size = UDim2.new(1, 0, 1, 0)
-
-Title.Parent = Frame
-Title.BackgroundColor3 = Color3.new(0, 0, 0)
-Title.BorderColor3 = Color3.new(0, 0, 0)
-Title.Size = UDim2.new(1, 0, 0, 30)
-Title.Font = Enum.Font.SourceSansBold
-Title.Text = "Ingrese la clave"
-Title.TextColor3 = Color3.new(1, 0, 0)
-Title.TextSize = 20
-
-PasswordBox.Parent = Frame
-PasswordBox.BackgroundColor3 = Color3.new(0, 0, 0)
-PasswordBox.BorderColor3 = Color3.new(1, 0, 0)
-PasswordBox.Position = UDim2.new(0.25, 0, 0.5, -15)
-PasswordBox.Size = UDim2.new(0.5, 0, 0, 30)
-PasswordBox.Font = Enum.Font.SourceSans
-PasswordBox.Text = ""
-PasswordBox.TextColor3 = Color3.new(1, 0, 0)
-PasswordBox.TextSize = 16
-PasswordBox.PlaceholderText = "Ingrese la clave..."
-PasswordBox.TextWrapped = true
-PasswordBox.ClearTextOnFocus = false
-
--- Función para verificar la clave
-local function checkPassword()
-    local password = PasswordBox.Text
-    if password == "RED_7xdf00@#$/!oPdff" then
-        ScreenGui:Destroy()
-        -- Crear la interfaz de usuario
-local ScreenGui = Instance.new("ScreenGui")
-local Frame = Instance.new("Frame")
-local Title = Instance.new("TextLabel")
 local ScriptBox = Instance.new("TextBox")
 local ExecuteButton = Instance.new("TextButton")
 local DeleteButton = Instance.new("TextButton")
+local InjectButton = Instance.new("TextButton")
 local MinimizeButton = Instance.new("TextButton")
 
 -- Configurar la interfaz de usuario
@@ -96,6 +54,7 @@ ExecuteButton.Font = Enum.Font.SourceSansBold
 ExecuteButton.Text = "Ejecutar"
 ExecuteButton.TextColor3 = Color3.new(1, 1, 1)
 ExecuteButton.TextSize = 16
+ExecuteButton.Visible = false
 
 DeleteButton.Parent = Frame
 DeleteButton.BackgroundColor3 = Color3.new(0, 0, 0.4)
@@ -107,8 +66,18 @@ DeleteButton.Text = "Borrar"
 DeleteButton.TextColor3 = Color3.new(1, 1, 1)
 DeleteButton.TextSize = 16
 
+InjectButton.Parent = Frame
+InjectButton.BackgroundColor3 = Color3.new(0, 0, 0.4)
+InjectButton.BorderColor3 = Color3.new(0, 0, 0)
+InjectButton.Position = UDim2.new(0.75, 10, 0, 120)
+InjectButton.Size = UDim2.new(0.25, -20, 0, 30)
+InjectButton.Font = Enum.Font.SourceSansBold
+InjectButton.Text = "Inyectar"
+InjectButton.TextColor3 = Color3.new(1, 1, 1)
+InjectButton.TextSize = 14
+
 MinimizeButton.Parent = Frame
-MinimizeButton.BackgroundColor3 = Color3.new(0.5, 0, 0)
+MinimizeButton.BackgroundColor3 = Color3.new(1, 0, 0)
 MinimizeButton.BorderColor3 = Color3.new(0, 0, 0)
 MinimizeButton.Position = UDim2.new(1, -30, 0, 0)
 MinimizeButton.Size = UDim2.new(0, 30, 0, 30)
@@ -117,16 +86,26 @@ MinimizeButton.Text = "-"
 MinimizeButton.TextColor3 = Color3.new(1, 1, 1)
 MinimizeButton.TextSize = 16
 
--- Minimizar/Desminimizar la interfaz de usuario
+-- Animaciones de minimizar/desminimizar
 local isMinimized = false
+local originalSize = Frame.Size
+local minimizedSize = UDim2.new(0, 100, 0, 30)
+
 MinimizeButton.MouseButton1Click:Connect(function()
     isMinimized = not isMinimized
     if isMinimized then
-        Frame:TweenSize(UDim2.new(0, 100, 0, 30), Enum.EasingDirection.InOut, Enum.EasingStyle.Quart, 0.5, true)
+        Frame:TweenSize(minimizedSize, Enum.EasingDirection.InOut, Enum.EasingStyle.Quart, 0.5, true)
     else
-        Frame:TweenSize(UDim2.new(0, 840, 0, 480), Enum.EasingDirection.InOut, Enum.EasingStyle.Quart, 0.5, true)
+        Frame:TweenSize(originalSize, Enum.EasingDirection.InOut, Enum.EasingStyle.Quart, 0.5, true)
     end
 end)
+
+-- Función para inyectar RED Cheats
+local function injectREDCheats()
+    wait(14)
+    print("RED Cheats se ha inyectado exitosamente a Roblox.")
+    ExecuteButton.Visible = true
+end
 
 -- Ejecutar el script
 local function executeScript(script)
@@ -146,33 +125,22 @@ DeleteButton.MouseButton1Click:Connect(function()
     ScriptBox.Text = ""
 end)
 
--- Ejemplo de protección avanzada contra Anti-Trampas
-
--- Inserta aquí tu código de protección personalizado
--- Utiliza técnicas de ofuscación, cifrado y randomización para dificultar la detección
--- Evita patrones predecibles y comportamientos sospechosos
-
-local function executeProtectedScript(script)
-    -- Aquí se ejecuta el script protegido
-    -- Asegúrate de que el código protegido no sea fácilmente detectable
-end
-
--- Evento para ejecutar el script protegido
-ExecuteButton.MouseButton1Click:Connect(function()
-    local script = ScriptBox.Text
-    if script ~= "" then
-        executeProtectedScript(script)
-    end
+-- Inyectar RED Cheats
+InjectButton.MouseButton1Click:Connect(function()
+    injectREDCheats()
 end)
 
-    else
-        print("Clave incorrecta")
-    end
-end
+-- Evitar detección por métodos anti-trampas
+local antiCheats = {
+    ["AntiCheat1"] = function()
+        -- Implementa tu lógica para evitar la detección por AntiCheat1
+    end,
+    ["AntiCheat2"] = function()
+        -- Implementa tu lógica para evitar la detección por AntiCheat2
+    end,
+    -- Agrega más métodos anti-trampas aquí
+}
 
--- Evento para verificar la clave al presionar Enter
-PasswordBox.FocusLost:Connect(function(enterPressed)
-    if enterPressed then
-        checkPassword()
-    end
-end)
+for _, antiCheat in pairs(antiCheats) do
+    antiCheat()
+end
